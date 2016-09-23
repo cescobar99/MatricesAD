@@ -53,7 +53,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="270" y="10" width="200" height="-1"/>
+              <AbsoluteConstraints x="430" y="10" width="200" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -67,7 +67,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="70" width="380" height="100"/>
+              <AbsoluteConstraints x="40" y="60" width="380" height="100"/>
             </Constraint>
           </Constraints>
 
@@ -121,7 +121,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="480" y="60" width="580" height="100"/>
+              <AbsoluteConstraints x="470" y="60" width="580" height="100"/>
             </Constraint>
           </Constraints>
 
@@ -217,11 +217,13 @@
         <Component class="javax.swing.JComboBox" name="cmbOperaciones">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="6">
                 <StringItem index="0" value="Cant Num Pares"/>
                 <StringItem index="1" value="Numeros Pares"/>
                 <StringItem index="2" value="Letra c"/>
-                <StringItem index="3" value="Letra H"/>
+                <StringItem index="3" value="Diagonal Principal"/>
+                <StringItem index="4" value="Letra H"/>
+                <StringItem index="5" value=" "/>
               </StringArray>
             </Property>
           </Properties>
