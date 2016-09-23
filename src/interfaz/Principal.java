@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package interfaz;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -63,33 +64,53 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setText("Numero Filas");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 20));
-        jPanel2.add(txtNumeroFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 40, -1));
+        jPanel2.add(txtNumeroFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 40, -1));
 
         jLabel3.setText("Numero Columnas");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, 20));
-        jPanel2.add(txtNumeroColumnas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 40, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, 20));
+        jPanel2.add(txtNumeroColumnas, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 40, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 340, 100));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 380, 100));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmdCrear.setText("Crear");
+        cmdCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCrearActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         cmdLlenarManual.setText("Manual");
         jPanel3.add(cmdLlenarManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
         cmdLlenarAutomatico.setText("Automatico");
+        cmdLlenarAutomatico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLlenarAutomaticoActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdLlenarAutomatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
 
         cmdOperaciones.setText("Operaciones");
+        cmdOperaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdOperacionesActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, -1, -1));
 
         cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLimpiarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 580, 100));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 580, 100));
 
         tblTablaInicial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,31 +137,88 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblTablaResultado);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 370, 260));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 370, 270));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtResultado.setEditable(false);
-        jPanel4.add(txtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 480, -1));
+        jPanel4.add(txtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 480, 40));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 550, 90));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 550, 110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1138, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1154, 671));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
+        int nf, nc;
+        DefaultTableModel tm, tm2;
+
+        nf = Integer.parseInt(txtNumeroFilas.getText());
+        nc = Integer.parseInt(txtNumeroColumnas.getText());
+        tm = (DefaultTableModel) tblTablaInicial.getModel();
+        tm2 = (DefaultTableModel) tblTablaResultado.getModel();
+
+        tm.setRowCount(nf);
+        tm.setColumnCount(nc);
+
+        tm2.setRowCount(nf);
+        tm2.setColumnCount(nc);
+
+    }//GEN-LAST:event_cmdCrearActionPerformed
+
+    private void cmdLlenarAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarAutomaticoActionPerformed
+        int nf, nc, n;
+        nc = tblTablaInicial.getColumnCount();
+        nf = tblTablaResultado.getRowCount();
+
+        for (int i = 0; i < nc; i++) {
+            for (int j = 0; j < nf; j++) {
+                n = (int) (Math.random() * 50 + 1);
+                tblTablaInicial.setValueAt(n, i, j);
+            }
+        }
+    }//GEN-LAST:event_cmdLlenarAutomaticoActionPerformed
+
+    private void cmdOperacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOperacionesActionPerformed
+        int op;
+        op = cmbOperaciones.getSelectedIndex();
+        
+
+    }//GEN-LAST:event_cmdOperacionesActionPerformed
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        int nc, nf;
+
+        nc = tblTablaInicial.getColumnCount();
+        nf = tblTablaInicial.getRowCount();
+
+        txtNumeroFilas.setText("");
+        txtNumeroColumnas.setText("");
+        txtNumeroFilas.requestFocusInWindow();
+        cmbOperaciones.setSelectedIndex(0);
+        txtResultado.setText("");
+
+        for (int i = 0; i < nc; i++) {
+            for (int j = 0; j < nf; j++) {
+
+                tblTablaInicial.setValueAt("", i, j);
+                tblTablaResultado.setValueAt("", j, j);
+            }
+        }
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
