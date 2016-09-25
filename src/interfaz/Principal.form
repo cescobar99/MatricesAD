@@ -217,13 +217,24 @@
         <Component class="javax.swing.JComboBox" name="cmbOperaciones">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="Cant Num Pares"/>
-                <StringItem index="1" value="Numeros Pares"/>
-                <StringItem index="2" value="Letra c"/>
-                <StringItem index="3" value="Diagonal Principal"/>
-                <StringItem index="4" value="Letra H"/>
-                <StringItem index="5" value=" "/>
+              <StringArray count="17">
+                <StringItem index="0" value="Diagonal Secundaria"/>
+                <StringItem index="1" value="Triangular Superior"/>
+                <StringItem index="2" value="Triangular Inferior"/>
+                <StringItem index="3" value="Matriz Transpuesta"/>
+                <StringItem index="4" value="Letra A"/>
+                <StringItem index="5" value="Letra Z"/>
+                <StringItem index="6" value="Letra T"/>
+                <StringItem index="7" value="Letra V"/>
+                <StringItem index="8" value="Letra E"/>
+                <StringItem index="9" value="Letra F"/>
+                <StringItem index="10" value="Letra P"/>
+                <StringItem index="11" value="Letra I"/>
+                <StringItem index="12" value="Letra N"/>
+                <StringItem index="13" value="Letra Y"/>
+                <StringItem index="14" value="Letra X"/>
+                <StringItem index="15" value=" "/>
+                <StringItem index="16" value=" "/>
               </StringArray>
             </Property>
           </Properties>
