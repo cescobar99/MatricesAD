@@ -105,6 +105,11 @@ public class Principal extends javax.swing.JFrame {
         cmdLlenarManual.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cmdLlenarManual.setForeground(new java.awt.Color(255, 255, 255));
         cmdLlenarManual.setText("Manual");
+        cmdLlenarManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLlenarManualActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdLlenarManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
         cmdLlenarAutomatico.setBackground(new java.awt.Color(0, 0, 0));
@@ -283,10 +288,9 @@ public class Principal extends javax.swing.JFrame {
             case 3:
                 for (int i = 0; i < nf; i++) {
                     for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (i == j) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
+                        aux = (int) tblTablaInicial.getValueAt(i ,j);
+                        tblTablaResultado.setValueAt(aux, j, i);
+                        
                     }
 
                 }
@@ -448,6 +452,25 @@ public class Principal extends javax.swing.JFrame {
     private void txtNumeroFilasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroFilasKeyTyped
 
     }//GEN-LAST:event_txtNumeroFilasKeyTyped
+
+    private void cmdLlenarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarManualActionPerformed
+        int nf, nc, n;
+        nf = tblTablaInicial.getRowCount();
+        nc = tblTablaInicial.getColumnCount();
+
+        for (int i = 0; i < nf; i++) {
+            for (int j = 0; j < nc; j++) {
+                n = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número en la posición: " + i + "," + j));
+                tblTablaInicial.setValueAt(n, i, j);
+            }
+        }
+        cmdCrear.setEnabled(false);
+        cmdLlenarManual.setEnabled(false);
+        cmdLlenarAutomatico.setEnabled(false);
+        cmdOperaciones.setEnabled(true);
+        cmdLimpiar.setEnabled(true);
+
+    }//GEN-LAST:event_cmdLlenarManualActionPerformed
 
     /**
      * @param args the command line arguments
