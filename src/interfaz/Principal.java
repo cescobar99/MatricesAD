@@ -252,7 +252,7 @@ public class Principal extends javax.swing.JFrame {
         nf = tblTablaInicial.getRowCount();
         nc = tblTablaResultado.getColumnCount();
         switch (op) {
-            case 0:
+            case 0: 
                 for (int i = 0; i < nf; i++) {
                     for (int j = 0; j < nc; j++) {
                         aux = (int) tblTablaInicial.getValueAt(i, j);
@@ -267,7 +267,7 @@ public class Principal extends javax.swing.JFrame {
                 for (int i = 0; i < nf; i++) {
                     for (int j = 0; j < nc; j++) {
                         aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j >= i) {
+                        if (i==j || j >= i) {
                             tblTablaResultado.setValueAt(aux, i, j);
                         }
                     }
@@ -278,7 +278,7 @@ public class Principal extends javax.swing.JFrame {
                 for (int i = 0; i < nf; i++) {
                     for (int j = 0; j < nc; j++) {
                         aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j <= i) {
+                        if (i==j || j <= i) {
                             tblTablaResultado.setValueAt(aux, i, j);
                         }
                     }
@@ -329,10 +329,10 @@ public class Principal extends javax.swing.JFrame {
                 }
                 break;
             case 7:
-                for (int i = 0; i < nf; i++) {
+                for (int i = 0; i < (nf / 2); i++) {
                     for (int j = 0; j < nc; j++) {
                         aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (i == j) {
+                        if ((i + j == nf - 1 && i <= j) || (i == j && i + j <= nf)) {
                             tblTablaResultado.setValueAt(aux, i, j);
                         }
                     }
@@ -365,7 +365,7 @@ public class Principal extends javax.swing.JFrame {
                 for (int i = 0; i < nf; i++) {
                     for (int j = 0; j < nc; j++) {
                         aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j == 0 || i == 0 || i == (nf / 2) || i == j / 2) {
+                        if ((j == 0 || i == 0 || i == nf / 2) || (j == nc - 1 && j / i >= 2)) {
                             tblTablaResultado.setValueAt(aux, i, j);
                         }
                     }
@@ -398,7 +398,7 @@ public class Principal extends javax.swing.JFrame {
                 for (int i = 0; i < nf; i++) {
                     for (int j = 0; j < nc; j++) {
                         aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j == 0 / 2 || i == nf / 2 || j == (nf - 1) / 2) {
+                        if (j == nc / 2 && j <= i || (i + j == nf - 1 && i <= j) || (i == j && i + j <= nf)) {
                             tblTablaResultado.setValueAt(aux, i, j);
                         }
                     }
