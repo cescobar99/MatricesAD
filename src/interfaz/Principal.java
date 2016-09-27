@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import clases.Helper;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,11 +21,11 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        cmdCrear.setEnabled(true);
-        cmdLlenarManual.setEnabled(false);
-        cmdLlenarAutomatico.setEnabled(false);
-        cmdOperaciones.setEnabled(false);
-        cmdLimpiar.setEnabled(true);
+        JButton botonesH[] = {cmdCrear, cmdLimpiar};
+        JButton botonesD[] = {cmdLlenarManual, cmdLlenarAutomatico, cmdOperaciones};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }
 
     /**
@@ -83,6 +85,12 @@ public class Principal extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 255));
         jLabel3.setText("Numero Columnas");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
+
+        txtNumeroColumnas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroColumnasKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtNumeroColumnas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 40, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 270, 130));
@@ -195,36 +203,36 @@ public class Principal extends javax.swing.JFrame {
     private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
         int nf, nc;
         DefaultTableModel tm, tm2;
-        try {
-            if (txtNumeroFilas.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por Favor llene el campo Numero de filas", "ERROR", JOptionPane.ERROR_MESSAGE);
-                txtNumeroFilas.requestFocusInWindow();
-                cmdCrear.setEnabled(true);
-            } else if (txtNumeroColumnas.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por Favor llene el campo Numero de Columnas", "ERROR", JOptionPane.ERROR_MESSAGE);
-                txtNumeroColumnas.requestFocusInWindow();
-                cmdCrear.setEnabled(true);
-            } else {
 
-                nf = Integer.parseInt(txtNumeroFilas.getText());
-                nc = Integer.parseInt(txtNumeroColumnas.getText());
-                tm = (DefaultTableModel) tblTablaInicial.getModel();
-                tm2 = (DefaultTableModel) tblTablaResultado.getModel();
+        if (txtNumeroFilas.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por Favor llene el campo Numero de filas", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtNumeroFilas.requestFocusInWindow();
+            JButton botonesH[] = {cmdCrear};
+            Helper.habilitarBotones(botonesH);
+        } else if (txtNumeroColumnas.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por Favor llene el campo Numero de Columnas", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtNumeroColumnas.requestFocusInWindow();
+            JButton botonesH[] = {cmdCrear};
+            Helper.habilitarBotones(botonesH);
+        } else {
 
-                tm.setRowCount(nf);
-                tm.setColumnCount(nc);
+            nf = Integer.parseInt(txtNumeroFilas.getText());
+            nc = Integer.parseInt(txtNumeroColumnas.getText());
+            tm = (DefaultTableModel) tblTablaInicial.getModel();
+            tm2 = (DefaultTableModel) tblTablaResultado.getModel();
 
-                tm2.setRowCount(nf);
-                tm2.setColumnCount(nc);
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Digite un Número Válido", "ERROR", JOptionPane.ERROR_MESSAGE);
+            tm.setRowCount(nf);
+            tm.setColumnCount(nc);
+
+            tm2.setRowCount(nf);
+            tm2.setColumnCount(nc);
         }
-        cmdCrear.setEnabled(false);
-        cmdLlenarManual.setEnabled(true);
-        cmdLlenarAutomatico.setEnabled(true);
-        cmdOperaciones.setEnabled(false);
-        cmdLimpiar.setEnabled(true);
+
+        JButton botonesH[] = {cmdLlenarManual, cmdLlenarAutomatico, cmdLimpiar};
+        JButton botonesD[] = {cmdCrear, cmdOperaciones};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdCrearActionPerformed
 
     private void cmdLlenarAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarAutomaticoActionPerformed
@@ -238,232 +246,140 @@ public class Principal extends javax.swing.JFrame {
                 tblTablaInicial.setValueAt(n, i, j);
             }
         }
-        cmdCrear.setEnabled(false);
-        cmdLlenarManual.setEnabled(false);
-        cmdLlenarAutomatico.setEnabled(false);
-        cmdOperaciones.setEnabled(true);
-        cmdLimpiar.setEnabled(true);
+        JButton botonesH[] = {cmdOperaciones, cmdLimpiar};
+        JButton botonesD[] = {cmdCrear, cmdLlenarManual, cmdLlenarAutomatico};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdLlenarAutomaticoActionPerformed
 
     private void cmdOperacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOperacionesActionPerformed
-        int op, nf, nc, aux, cont = 0;
+        int op;
 
         op = cmbOperaciones.getSelectedIndex();
-        nf = tblTablaInicial.getRowCount();
-        nc = tblTablaResultado.getColumnCount();
-        switch (op) {
-            case 0: 
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (nf - 1 - i == j) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
 
-                }
+        switch (op) {
+            case 0:
+                Helper.diagonalSecundaria(tblTablaInicial, tblTablaResultado);
                 break;
             case 1:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (i==j || j >= i) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.triangularSuperior(tblTablaInicial, tblTablaResultado);
                 break;
             case 2:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (i==j || j <= i) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.triangularInferior(tblTablaInicial, tblTablaResultado);
                 break;
             case 3:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i ,j);
-                        tblTablaResultado.setValueAt(aux, j, i);
-                        
-                    }
-
-                }
+                Helper.matrizTraspuesta(tblTablaInicial, tblTablaResultado);
                 break;
             case 4:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j == 0 || i == 0 || i == (nf - 1) / 2 || j == (nc - 1)) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraA(tblTablaInicial, tblTablaResultado);
                 break;
             case 5:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (i == 0 || nf - 1 - i == j || i == (nf - 1)) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraZ(tblTablaInicial, tblTablaResultado);
                 break;
             case 6:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (i == 0 || j == (nc / 2)) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraT(tblTablaInicial, tblTablaResultado);
                 break;
             case 7:
-                for (int i = 0; i < (nf / 2); i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if ((i + j == nf - 1 && i <= j) || (i == j && i + j <= nf)) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraV(tblTablaInicial, tblTablaResultado);
                 break;
             case 8:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j == 0 || i == 0 || i == (nf / 2) || i == (nf - 1)) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraE(tblTablaInicial, tblTablaResultado);
                 break;
             case 9:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j == 0 || i == 0 || i == (nf / 2)) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraF(tblTablaInicial, tblTablaResultado);
                 break;
             case 10:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if ((j == 0 || i == 0 || i == nf / 2) || (j == nc - 1 && j / i >= 2)) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraP(tblTablaInicial, tblTablaResultado);
                 break;
             case 11:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (i == 0 || j == (nc / 2) || i == (nf - 1)) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraI(tblTablaInicial, tblTablaResultado);
                 break;
             case 12:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j == 0 || i == j || j == nc - 1) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraN(tblTablaInicial, tblTablaResultado);
                 break;
             case 13:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j == nc / 2 && j <= i || (i + j == nf - 1 && i <= j) || (i == j && i + j <= nf)) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraY(tblTablaInicial, tblTablaResultado);
                 break;
             case 14:
-                for (int i = 0; i < nf; i++) {
-                    for (int j = 0; j < nc; j++) {
-                        aux = (int) tblTablaInicial.getValueAt(i, j);
-                        if (j == i || nf - 1 - i == j) {
-                            tblTablaResultado.setValueAt(aux, i, j);
-                        }
-                    }
-
-                }
+                Helper.letraX(tblTablaInicial, tblTablaResultado);
                 break;
         }
-        cmdCrear.setEnabled(false);
-        cmdLlenarAutomatico.setEnabled(false);
-        cmdLlenarManual.setEnabled(false);
-        cmdOperaciones.setEnabled(true);
-        cmdLimpiar.setEnabled(true);
+        JButton botonesH[] = {cmdOperaciones, cmdLimpiar};
+        JButton botonesD[] = {cmdCrear, cmdLlenarManual, cmdLlenarAutomatico};
 
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdOperacionesActionPerformed
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
 
-        DefaultTableModel tm, tm2;
         txtNumeroFilas.setText("");
         txtNumeroColumnas.setText("");
         txtNumeroFilas.requestFocusInWindow();
         cmbOperaciones.setSelectedIndex(0);
-        tm = (DefaultTableModel) tblTablaInicial.getModel();
-        tm2 = (DefaultTableModel) tblTablaResultado.getModel();
 
-        tm.setRowCount(0);
-        tm.setColumnCount(0);
+        Helper.porDefectoTabla(tblTablaInicial);
+        Helper.porDefectoTabla(tblTablaResultado);
 
-        tm2.setRowCount(0);
-        tm2.setColumnCount(0);
+        JButton botonesH[] = {cmdCrear, cmdLimpiar};
+        JButton botonesD[] = {cmdLlenarManual, cmdLlenarAutomatico, cmdOperaciones};
 
-        cmdCrear.setEnabled(true);
-        cmdLlenarManual.setEnabled(false);
-        cmdLlenarAutomatico.setEnabled(false);
-        cmdOperaciones.setEnabled(false);
-        cmdLimpiar.setEnabled(true);
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
 
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void txtNumeroFilasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroFilasKeyTyped
+        char c = evt.getKeyChar();
 
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNumeroFilasKeyTyped
 
     private void cmdLlenarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarManualActionPerformed
         int nf, nc, n;
+
+        int sw, res;
         nf = tblTablaInicial.getRowCount();
         nc = tblTablaInicial.getColumnCount();
 
         for (int i = 0; i < nf; i++) {
             for (int j = 0; j < nc; j++) {
-                n = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número en la posición: " + i + "," + j));
-                tblTablaInicial.setValueAt(n, i, j);
+                do {
+                    sw = 1;
+                    try {
+                        n = Integer.parseInt(JOptionPane.showInputDialog(this, "Digite el elemento en la posicion[" + i + "] " + " [" + j + "]").trim());
+                        tblTablaInicial.setValueAt(n, i, j);
+                    } catch (NumberFormatException e) {
+                        Helper.mensaje(this, "Digite un numero valido", 3);
+                        sw = 0;
+                    } catch (NullPointerException e) {
+                        res = JOptionPane.showConfirmDialog(this, "¿seguro que deseas salir?", "Salor", JOptionPane.YES_NO_OPTION);
+                        if (res == 0) {
+                            sw = 1;
+                            i = nf;
+                            j = nc;
+                            Helper.porDefectoTabla(tblTablaInicial);
+                            Helper.porDefectoTabla(tblTablaResultado);
+
+                        } else {
+                            sw = 0;
+                        }
+
+                    }
+                } while (sw == 0);
             }
         }
+        JButton botonesH[] = {cmdOperaciones, cmdLimpiar};
+        JButton botonesD[] = {cmdCrear, cmdLlenarManual, cmdLlenarAutomatico};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+
         cmdCrear.setEnabled(false);
         cmdLlenarManual.setEnabled(false);
         cmdLlenarAutomatico.setEnabled(false);
@@ -471,6 +387,16 @@ public class Principal extends javax.swing.JFrame {
         cmdLimpiar.setEnabled(true);
 
     }//GEN-LAST:event_cmdLlenarManualActionPerformed
+
+    private void txtNumeroColumnasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroColumnasKeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumeroColumnasKeyTyped
 
     /**
      * @param args the command line arguments
