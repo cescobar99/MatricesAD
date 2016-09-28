@@ -168,11 +168,12 @@ public class Helper {
         int nf, nc, aux;
         nc = tabla1.getColumnCount();
         nf = tabla1.getRowCount();
-        for (int i = 0; i < (nf / 2); i++) {
+        for (int i = 0; i < nf; i++) {
             for (int j = 0; j < nc; j++) {
                 aux = (int) tabla1.getValueAt(i, j);
-                if ((i + j == nf - 1 && i <= j) || (i == j && i + j <= nf)) {
+                if (j == i / 2 || j == nf - 1 - i / 2) {
                     tabla2.setValueAt(aux, i, j);
+
                 }
             }
         }

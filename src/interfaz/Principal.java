@@ -207,11 +207,13 @@ public class Principal extends javax.swing.JFrame {
         if (txtNumeroFilas.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor llene el campo Numero de filas", 3);
             txtNumeroFilas.requestFocusInWindow();
+            
             JButton botonesH[] = {cmdCrear};
             Helper.habilitarBotones(botonesH);
         } else if (txtNumeroColumnas.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor llene el campo Numero de Columnas", 3);
             txtNumeroColumnas.requestFocusInWindow();
+           
             JButton botonesH[] = {cmdCrear};
             Helper.habilitarBotones(botonesH);
         }
