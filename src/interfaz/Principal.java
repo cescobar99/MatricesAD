@@ -207,66 +207,67 @@ public class Principal extends javax.swing.JFrame {
         if (txtNumeroFilas.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor llene el campo Numero de filas", 3);
             txtNumeroFilas.requestFocusInWindow();
-            
+
             JButton botonesH[] = {cmdCrear};
             Helper.habilitarBotones(botonesH);
         } else if (txtNumeroColumnas.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor llene el campo Numero de Columnas", 3);
             txtNumeroColumnas.requestFocusInWindow();
-           
+
             JButton botonesH[] = {cmdCrear};
             Helper.habilitarBotones(botonesH);
-        }
-
-        nf = Integer.parseInt(txtNumeroFilas.getText());
-        nc = Integer.parseInt(txtNumeroColumnas.getText());
-        if (nf == 0) {
-            Helper.mensaje(this, "No puede ser cero", 3);
-            txtNumeroFilas.requestFocusInWindow();
-            txtNumeroFilas.selectAll();
-        } else if (nc == 0) {
-            Helper.mensaje(this, "No puede ser cero", 3);
-            txtNumeroColumnas.selectAll();
-        } else if (nc != nf) {
-            Helper.mensaje(this, "Digite el numero de filas y columnas iguales, para obtener una matriz mejor presentada", 3);
-            txtNumeroFilas.setText("");
-            txtNumeroColumnas.setText("");
-            txtNumeroFilas.requestFocusInWindow();
-        } else if (nc <= 5 || nf <= 5) {
-            Helper.mensaje(this, "Digite un numero mayor para que las letras se puedan observar mejor", 3);
-            txtNumeroFilas.setText("");
-            txtNumeroColumnas.setText("");
-            txtNumeroFilas.requestFocusInWindow();
-        } else if (nc > 13 || nf > 13) {
-            Helper.mensaje(this, "Digite un numero menor para que se puedan observar mejor las letras", 3);
-            txtNumeroFilas.setText("");
-            txtNumeroColumnas.setText("");
-            txtNumeroFilas.requestFocusInWindow();
-        } else if (nf % 2 == 0) {
-            Helper.mensaje(this, "Digite un numero impar para observar mejor las letras", 2);
-            txtNumeroFilas.setText("");
-            txtNumeroColumnas.setText("");
-            txtNumeroFilas.requestFocusInWindow();
-        } else if (nc % 2 == 0) {
-            Helper.mensaje(this, "Digite Un Numero Impar Para Observar Mejor Las Letras", 2);
-            txtNumeroFilas.setText("");
-            txtNumeroColumnas.setText("");
-            txtNumeroFilas.requestFocusInWindow();
         } else {
-            tm = (DefaultTableModel) tblTablaInicial.getModel();
-            tm2 = (DefaultTableModel) tblTablaResultado.getModel();
 
-            tm.setRowCount(nf);
-            tm.setColumnCount(nc);
+            nf = Integer.parseInt(txtNumeroFilas.getText());
+            nc = Integer.parseInt(txtNumeroColumnas.getText());
+            if (nf == 0) {
+                Helper.mensaje(this, "No puede ser cero", 3);
+                txtNumeroFilas.requestFocusInWindow();
+                txtNumeroFilas.selectAll();
+            } else if (nc == 0) {
+                Helper.mensaje(this, "No puede ser cero", 3);
+                txtNumeroColumnas.selectAll();
+            } else if (nc != nf) {
+                Helper.mensaje(this, "Digite el numero de filas y columnas iguales, para obtener una matriz mejor presentada", 3);
+                txtNumeroFilas.setText("");
+                txtNumeroColumnas.setText("");
+                txtNumeroFilas.requestFocusInWindow();
+            } else if (nc <= 5 || nf <= 5) {
+                Helper.mensaje(this, "Digite un numero mayor para que las letras se puedan observar mejor", 3);
+                txtNumeroFilas.setText("");
+                txtNumeroColumnas.setText("");
+                txtNumeroFilas.requestFocusInWindow();
+            } else if (nc > 13 || nf > 13) {
+                Helper.mensaje(this, "Digite un numero menor para que se puedan observar mejor las letras", 3);
+                txtNumeroFilas.setText("");
+                txtNumeroColumnas.setText("");
+                txtNumeroFilas.requestFocusInWindow();
+            } else if (nf % 2 == 0) {
+                Helper.mensaje(this, "Digite un numero impar para observar mejor las letras", 2);
+                txtNumeroFilas.setText("");
+                txtNumeroColumnas.setText("");
+                txtNumeroFilas.requestFocusInWindow();
+            } else if (nc % 2 == 0) {
+                Helper.mensaje(this, "Digite Un Numero Impar Para Observar Mejor Las Letras", 2);
+                txtNumeroFilas.setText("");
+                txtNumeroColumnas.setText("");
+                txtNumeroFilas.requestFocusInWindow();
+            } else {
+                tm = (DefaultTableModel) tblTablaInicial.getModel();
+                tm2 = (DefaultTableModel) tblTablaResultado.getModel();
 
-            tm2.setRowCount(nf);
-            tm2.setColumnCount(nc);
+                tm.setRowCount(nf);
+                tm.setColumnCount(nc);
 
-            JButton botonesH[] = {cmdLlenarManual, cmdLlenarAutomatico, cmdLimpiar};
-            JButton botonesD[] = {cmdCrear, cmdOperaciones};
+                tm2.setRowCount(nf);
+                tm2.setColumnCount(nc);
 
-            Helper.habilitarBotones(botonesH);
-            Helper.deshabilitarBotones(botonesD);
+                JButton botonesH[] = {cmdLlenarManual, cmdLlenarAutomatico, cmdLimpiar};
+                JButton botonesD[] = {cmdCrear, cmdOperaciones};
+
+                Helper.habilitarBotones(botonesH);
+                Helper.deshabilitarBotones(botonesD);
+            }
         }
     }//GEN-LAST:event_cmdCrearActionPerformed
 
