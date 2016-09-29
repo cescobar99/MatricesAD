@@ -293,6 +293,7 @@ public class Principal extends javax.swing.JFrame {
         int op;
 
         op = cmbOperaciones.getSelectedIndex();
+        Helper.limpiadoTabla(tblTablaResultado);
 
         switch (op) {
             case 0:
@@ -394,7 +395,7 @@ public class Principal extends javax.swing.JFrame {
                         Helper.mensaje(this, "Digite un numero valido", 3);
                         sw = 0;
                     } catch (NullPointerException e) {
-                        res = JOptionPane.showConfirmDialog(this, "¿seguro que deseas salir?", "Salor", JOptionPane.YES_NO_OPTION);
+                        res = JOptionPane.showConfirmDialog(this, "¿seguro que deseas salir?", "Salir", JOptionPane.YES_NO_OPTION);
                         if (res == 0) {
                             sw = 1;
                             i = nf;
