@@ -417,12 +417,6 @@ public class Principal extends javax.swing.JFrame {
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
 
-        cmdCrear.setEnabled(false);
-        cmdLlenarManual.setEnabled(false);
-        cmdLlenarAutomatico.setEnabled(false);
-        cmdOperaciones.setEnabled(true);
-        cmdLimpiar.setEnabled(true);
-
     }//GEN-LAST:event_cmdLlenarManualActionPerformed
 
     private void txtNumeroColumnasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroColumnasKeyTyped
